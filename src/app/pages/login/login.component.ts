@@ -17,6 +17,8 @@ export class LoginComponent {
   errorMessage = '';
   loading = false;
 
+  txtToggleSenha = 'Mostrar Senha';
+
   constructor(
     private authService: AuthService,
     private router: Router,
@@ -37,5 +39,13 @@ export class LoginComponent {
         this.cdr.detectChanges(); // Atualiza a tela para mostrar a mensagem de erro
       }
     });
+  }
+
+  togglePasswordVisibility() {
+    const passwordInput = document.querySelector<HTMLInputElement>('input[name="password"]');
+    if (passwordInput) {
+      passwordInput.type = passwordInput.type === 'password' ? 'text' : 'password';
+      this.txtToggleSenha = passwordInput.type === 'password' ? 'Mostrar Senha' : 'Ocultar Senha';
+    }
   }
 }

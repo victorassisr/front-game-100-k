@@ -22,6 +22,7 @@
         name="password" 
         required 
       />
+      <button class="btn-link" type="button" (click)="togglePasswordVisibility()">{{txtToggleSenha}}</button>
     </div>
 
     <p class="error-msg" *ngIf="errorMessage">{{ errorMessage }}</p>
