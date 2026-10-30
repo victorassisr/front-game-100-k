@@ -75,3 +75,17 @@
     }
   }
 }
+
+.btn-link {
+  background: none !important;
+  border: none !important;
+  color: #007bff !important;
+  cursor: pointer !important;
+  font-size: 0.9rem !important;
+  margin-top: 0.5rem !important;
+  text-decoration: underline !important;
+
+  &:hover {
+    color: #0056b3;
+  }
+}
