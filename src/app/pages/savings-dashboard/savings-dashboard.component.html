@@ -1,0 +1,51 @@
+<div class="container">
+  <header class="header">
+    <h1>Desafio da Caixinha (1 a 450)</h1>
+    <p>Guarde dinheiro e acompanhe sua evolução.</p>
+  </header>
+
+  <div *ngIf="loading" class="loading">Carregando seus dados...</div>
+  <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+  <div *ngIf="data" class="dashboard">
+    <!-- Cards de Resumo -->
+    <div class="metrics-grid">
+      <div class="card">
+        <h3>Total Guardado</h3>
+        <p class="highlight">R$ {{ data.metrics.totalSaved | number:'1.2-2' }}</p>
+        <span class="sub">Meta: R$ {{ data.metrics.targetTotal | number:'1.2-2' }}</span>
+      </div>
+      <div class="card">
+        <h3>Progresso</h3>
+        <p class="highlight">{{ data.metrics.progressPercentage }}%</p>
+        <div class="progress-bar-bg">
+          <div class="progress-bar-fill" [style.width.%]="data.metrics.progressPercentage"></div>
+        </div>
+      </div>
+      <div class="card">
+        <h3>Números Concluídos</h3>
+        <p class="highlight">{{ data.metrics.completedCount }} <span class="small">/ 450</span></p>
+        <span class="sub">Faltam {{ data.metrics.remainingCount }} números</span>
+      </div>
+    </div>
+
+    <!-- Ações Globais -->
+    <div class="actions">
+      <button class="btn-reset" (click)="resetChallenge()">Zerar Desafio</button>
+    </div>
+
+    <!-- Grade de Números -->
+    <div class="grid-container">
+      <h2>Selecione o valor depositado:</h2>
+      <div class="grid">
+        <button 
+          *ngFor="let entry of data.entries" 
+          class="grid-item"
+          [class.checked]="entry.checked"
+          (click)="toggleNumber(entry)">
+          {{ entry.number }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
