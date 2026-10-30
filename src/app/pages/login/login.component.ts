@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -17,7 +17,11 @@ export class LoginComponent {
   errorMessage = '';
   loading = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private cdr: ChangeDetectorRef
+) {}
 
   onLogin() {
     this.loading = true;
@@ -30,6 +34,7 @@ export class LoginComponent {
       error: () => {
         this.errorMessage = 'Usuário ou senha inválidos.';
         this.loading = false;
+        this.cdr.detectChanges(); // Atualiza a tela para mostrar a mensagem de erro
       }
     });
   }
